@@ -30,18 +30,34 @@ public class StringUtils {
 		return new String(temp);
 	}
 	
+	/**
+	 * 简单冒泡排序算法
+	 * @param a int数组
+	 */
 	public static void bubbleSort(int[] a){
 		if (a.length == 0) {
 			System.out.println("int array length is 0");
 			return;
 		}
-		for (int i = 0; i < a.length - 1; i++) {
-			if (a[i] > a[i + 1]) {
-				int hold = a[i];
-				a[i] = a[i + 1];
-				a[i + 1] = hold;
-			}
+//		标记无序区最后一个key的位置，初始状态为数组最后1个元素
+		int bound = a.length - 1;
+		while (bound != 0) {
+//			对无序区的每一个元素和其相邻元素比较
+			for (int i = 0; i < bound; i++) {
+//				如果无序则交换
+				if (a[i] > a[i + 1]) {
+					int hold = a[i];
+					a[i] = a[i + 1];
+					a[i + 1] = hold;
+				}
+//				每趟比较后，无序区位置标记－1
+				bound--;
+			}			
 		}
+//		System.out.println("tes");
+//		for (int i = 0; i < a.length; i++) {
+//			System.out.println(a[i]);
+//		}
 	}
 	
 	public static boolean isBracketMatch(String sequence){
@@ -162,16 +178,32 @@ public class StringUtils {
 		temp = isMinus?(-1)*temp:temp;
 		return temp;
 	}
-	public static float StringToFloat(String str) throws Exception {
+	/**
+	 * @param str
+	 * @return
+	 * @throws Exception
+	 */
+	public static double StringToFloat(String str) throws Exception {
 		if (str.isEmpty()) {
 			throw new Exception("String empty!");
 		}
 		//TODO
-		if (!isFloatStr(str)) {
-			throw new Exception("not float string!");
+//		if (!isFloatStr(str)) {
+//			throw new Exception("not float string!");
+//		}
+		double temp = 0;
+//		按小数点"."分割字符串
+		String[] slice = str.split("\\.");
+//		整数部分
+		int integerPart = StringToInt(slice[0]);
+//		小数部分
+		double decimalPart = 0;
+//		如果小数和整数部分都存在，计算小数部分的数值
+		if (slice.length == 2) {
+			decimalPart = StringToInt(slice[1])*Math.pow(10, -1*slice[1].length());
 		}
-		float temp = 0;
-	
+				
+		temp = integerPart + decimalPart;
 		return temp;
 	}
 	
@@ -187,9 +219,47 @@ public class StringUtils {
 	public static int subStringIndex(String s, String t){
 		int i=0;
 		int j=0;
+		return 0;
 	
 	}
+	
+	/**
+	 * @param s ASCII String
+	 * @return
+	 * @throws Exception
+	 */
+	public static char first (String s) {
+		if (s.isEmpty()) {
+			return 0;
+		}
+		char[] temp = s.toCharArray();
+		final int TABLESIZE = 256;
+		int[] hashTable = new int[TABLESIZE];
+		for (int i = 0; i < hashTable.length; i++) {
+			hashTable[i]=0;
+		}
+		int index=0;
+		while (index<temp.length) {
+			hashTable[temp[index]]++;
+			index++;
+		}
+		for (int i = 0; i < hashTable.length; i++) {
+			if (hashTable[i]==1) {
+				return (char) i;
+			}
+		}
+		return 0;
 
+	}
+	
+	public static int maxSum(int[] array){
+		for (int i = 0; i < array.length; i++) {
+			for (int j = i; j < array.length; j++) {
+				
+			}
+			
+		}
+	}
 	
 	public static void main(String[] args) {
 		try {
@@ -207,6 +277,17 @@ public class StringUtils {
         String top=teststack.peek();
         String brack = "{";
         boolean strIsSame = (brack == top) ;
+        System.out.println(first("abbca"));
+        try {
+			System.out.println(StringToFloat("1435"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        int num = 10;
+        String pre = String.valueOf(num);
+       
+        
 	}
 	
 	
