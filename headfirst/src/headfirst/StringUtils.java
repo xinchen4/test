@@ -183,6 +183,12 @@ public class StringUtils {
 		return str.matches(regex);
 		
 	}
+	
+	public static int subStringIndex(String s, String t){
+		int i=0;
+		int j=0;
+	
+	}
 
 	
 	public static void main(String[] args) {
